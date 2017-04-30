@@ -1,27 +1,3 @@
-# Robot Edubasica
-Se trata de un robot controlado por teléfono móvil con Bluetooth y potencia regulable de motores
-
-## Componentes
-Consta de:
-* Chasis con dos motores de DC
-* Arduino
-* Shield Edubasica
-* Receptor de Bluetooth JY-MCU
-
-## Software
-* IDE Arduino, para la programación de Arduino con Edubasica
-*  Arduino bluetooth, app de Android para mandar señales de control mediante bluetooth a Arduino
-
-
-## Funcionamiento
-Con el potenciómetro colocado en Edubasica regulamos la potencia de los dos motores entre 0 y 255, se visualiza todo ello en los leds de EDubasica (se encienden 0, 1, 2 o 3 en función de la potencia escogida).
-
-Los leds conectados a pin 3 y 5 (verde y rojo) en Edubasica además lucén más si hay más luz ambiente y menos si hay menos luz.
-
-A la aplicación del dispositivo móvil le asignamos letras a enviar mediante bluetooth a la botonera de la app. Arduino recepciona por el puerto serie y a través del receptor bluetooth esas letras y en función del valor de las mismas activa funciones de paro, avance, retroceso, izquierda o derecha el robot.
-
-## Código
-~~~
 int motori8 = 8;
 int motori9 = 9;
 int pizquierda = 10;
@@ -76,7 +52,7 @@ luz=map(analogRead(A1),880,1023,255,0);
     analogWrite(5, luz);
   }
 
-
+ 
 }
 
 void atras() {
@@ -106,7 +82,7 @@ void para() {
   digitalWrite(motori9, LOW);
   digitalWrite(motord12, LOW);
   digitalWrite(motord13, LOW);
-
+    
 }
 
 
@@ -131,8 +107,8 @@ void izquierda() {
 
 }
 void loop() {
- Serial.println (luz);
-
+ Serial.println (luz); 
+ 
  if (Serial.available()>0) {
      dato=Serial.read();
 
@@ -144,7 +120,7 @@ if (dato=='A') {
   adelante();
   delay (tiempofuncionamiento);
   dato='P';
-  }
+  } 
 
 if (dato=='F') {
 
@@ -165,12 +141,14 @@ if (dato=='D') {
   derecha();
   delay (tiempofuncionamiento);
   dato='P';
-  }
+  } 
 
 if (dato=='P') {
 
   para();
-
+  
   }
+
+
+
 }
-~~~
